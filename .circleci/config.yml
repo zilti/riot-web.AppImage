@@ -22,7 +22,7 @@ jobs:
             source $HOME/.bashrc
             echo "nvm install v12.11.1..."
             nvm install v12.11.1
-            nvm use v12.1.1
+            nvm use v12.11.1
             npm version
             npm install -g yarn
       - run:
