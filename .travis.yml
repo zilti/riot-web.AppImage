@@ -29,7 +29,7 @@ script:
   - cd ..
   - export ARCH=x86_64
   - export UPDATE_INFORMATION="gh-releases-zsync|zilti|riot-web.AppImage|latest|Riot-*.AppImage.zsync"
-  - bin/linuxdeploy --appdir=AppDir --desktop-file=AppDir/riot-web.desktop --icon-file=AppDir/usr/share/icons/hicolor/scalable/apps/riot.svg -oappimage
+  - bin/linuxdeploy --appdir=AppDir --desktop-file=AppDir/riot-web.desktop --icon-file=AppDir/usr/share/icons/hicolor/scalable/apps/riot-nav.svg -oappimage
   - wget -c https://github.com/probonopd/uploadtool/raw/master/upload.sh
   - bash upload.sh *.AppImage*
 
