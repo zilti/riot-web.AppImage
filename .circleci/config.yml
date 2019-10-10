@@ -7,13 +7,16 @@ jobs:
       - checkout
       - run:
           command: |
-            curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
-            sudo apt-get update
-            sudo apt-get install nodejs fuse libfuse2 kmod git jq patch appstream-util libindicator7 libdbusmenu-gtk4
+            sudo apt-get install fuse libfuse2 kmod git jq patch appstream-util libindicator7 libdbusmenu-gtk4
             sudo depmod
             sudo modprobe fuse
-            rm -rf ~/.npmrc
-            npm install nodejs
+      - run:
+          command: |
+            curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | bash
+            export NVM_DIR="$HOME/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+            nvm install 12.1.1
+            nvm use 12.1.1
             npm version
             npm install -g yarn
       - run:
