@@ -7,7 +7,7 @@ jobs:
       - checkout
       - run:
           command: |
-            sudo apt-get install yarn git jq patch appstream libindicator7 libdbusmenu-gtk4
+            sudo apt-get install fuse yarn git jq patch appstream libindicator7 libdbusmenu-gtk4
             mkdir bin; cd bin
             curl -L https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage -o appimagetool; chmod +x appimagetool
             curl -L https://github.com/linuxdeploy/linuxdeploy/releases/download/continuous/linuxdeploy-x86_64.AppImage -o linuxdeploy; chmod +x linuxdeploy
