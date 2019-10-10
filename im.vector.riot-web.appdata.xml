@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright (C) 2014-2018 Free Software Foundation, Inc. -->
+<component type="desktop-application">
+ <id>im.vector.riot-web</id>
+ <metadata_license>FSFAP</metadata_license>
+ <project_license>Apache-2.0</project_license>
+ <name>Riot.im</name>
+ <summary>A glossy Matrix collaboration client for the web</summary>
+ <description>
+     <p>Riot (formerly known as Vector) is a Matrix web client built using the Matrix React SDK.</p>
+     <p>Riot is officially supported on the web in modern versions of Chrome, Firefox, and Safari. Other browsers may work, however official support is not provided. For accessing Riot on an Android or iOS device, check out riot-android and riot-ios - riot-web does not support mobile devices.</p>
+ </description>
+ <categories>
+     <category>Network</category>
+     <category>InstantMessaging</category>
+     <category>Chat</category>
+ </categories>
+ <launchable type="desktop-id">riot-web.desktop</launchable>
+ <screenshots>
+  <screenshot type="default">
+  <image type="source" width="1520" height="940">https://about.riot.im/images/home-communication.png</image>
+ </screenshot>
+ </screenshots>
+ <provides>
+     <binary>riot-web</binary>
+ </provides>
+ <releases>
+     <release version="1.4.3" date="2019-10-10">
+         <description>Initial AppImage release.</description>
+     </release>
+ </releases>
+ <url type="homepage">https://www.riot.im</url>
+ <update_contact>support@riot.im</update_contact>
+ <project_group>Vector.im</project_group>
+</component>

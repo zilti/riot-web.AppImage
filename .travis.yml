@@ -1,0 +1,37 @@
+language: C
+sudo: true
+
+script:
+  - sudo apt-get install nodejs git jq patch appstream
+  - mkdir bin; cd bin
+  - curl -L https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage -o appimagetool; chmod +x appimagetool
+  - curl -L https://github.com/linuxdeploy/linuxdeploy/releases/download/continuous/linuxdeploy-x86_64.AppImage -o linuxdeploy; chmod +x linuxdeploy
+  - cd ..
+  - curl -o- -L https://yarnpkg.com/install.sh | bash
+  - export PATH="$HOME/bin:$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+  - git clone https://github.com/vector-im/riot-web.git
+  - cd riot-web
+  - patch -i ../package.json.patch
+  - cp config.sample.json config.json
+  - yarn install
+  - yarn add electron-builder --dev
+  - yarn build:electron:appimage
+  - cd ..
+  - ./riot-web/electron_app/dist/Riot-*.AppImage --appimage-extract
+  - mv squashfs-root AppDir
+  - cd AppDir
+  - mkdir -p usr/share/metainfo
+  - mkdir -p usr/share/icons/hicolor/scalable/apps
+  - cp ../riot-nav.svg usr/share/icons/hicolor/scalable/apps
+  - cp ../im.vector.riot-web.appdata.xml usr/share/metainfo
+  - cp riot-web.desktop usr/share/applications
+  - cd ..
+  - export ARCH=x86_64
+  - linuxdeploy --desktop-file=AppDir/riot-web.desktop --icon-file=AppDir/usr/share/icons/hicolor/scalable/apps/riot.svg -oappimage
+  - wget -c https://github.com/probonopd/uploadtool/raw/master/upload.sh
+  - bash upload.sh *.AppImage*
+
+branches:
+  except:
+    - # Do not build tags that we create when we upload to GitHub Releases
+    - /^(?i:continuous)$/

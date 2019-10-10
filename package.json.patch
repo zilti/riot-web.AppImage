@@ -1,0 +1,35 @@
+*** package.json	2019-10-10 13:46:20.000000000 +0200
+--- package.json	2019-10-10 13:52:00.980055410 +0200
+***************
+*** 36,42 ****
+      "build:compile": "yarn reskindex && babel --source-maps -d lib src",
+      "build:bundle": "cross-env NODE_ENV=production webpack -p --progress --bail --mode production",
+      "build:bundle:dev": "webpack --progress --bail --mode development",
+!     "build:electron": "yarn clean && yarn build && yarn install:electron && electron-builder -wml --ia32 --x64",
+      "build:electron:linux": "yarn build && electron-builder -l --x64",
+      "build:electron:macos": "yarn build && electron-builder -m --x64",
+      "build:electron:windows": "yarn build && electron-builder -w --ia32 --x64",
+--- 36,43 ----
+      "build:compile": "yarn reskindex && babel --source-maps -d lib src",
+      "build:bundle": "cross-env NODE_ENV=production webpack -p --progress --bail --mode production",
+      "build:bundle:dev": "webpack --progress --bail --mode development",
+!     "build:electron": "yarn clean && yarn build && yarn install:electron && electron-builder -wml --ia32 --x64 && electron-builder -l appimage --x64",
+!     "build:electron:appimage": "yarn build && electron-builder -l appimage --x64",
+      "build:electron:linux": "yarn build && electron-builder -l --x64",
+      "build:electron:macos": "yarn build && electron-builder -m --x64",
+      "build:electron:windows": "yarn build && electron-builder -w --ia32 --x64",
+***************
+*** 165,170 ****
+--- 166,177 ----
+        "webapp/**/*",
+        "origin_migrator/**/*"
+      ],
++     "appImage": {
++       "category": "Network;InstantMessaging;Chat",
++       "desktop": {
++         "StartupWMClass": "riot"
++       }
++     },
+      "linux": {
+        "target": "deb",
+        "category": "Network;InstantMessaging;Chat",
