@@ -2,8 +2,9 @@ version: 2.1
 jobs:
   build:
     docker:
-      -image: circleci/node
+      - image: circleci/node
     steps:
+      - checkout
       - sudo apt-get install yarn git jq patch appstream libindicator7 libdbusmenu-gtk4
       - mkdir bin; cd bin
       - curl -L https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage -o appimagetool; chmod +x appimagetool
