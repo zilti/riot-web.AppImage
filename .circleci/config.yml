@@ -6,12 +6,14 @@ jobs:
     steps:
       - checkout
       - run:
+          name: "Installing dependencies"
           command: |
             curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
             sudo apt-get install fuse libfuse2 kmod git jq patch appstream-util libindicator7 libdbusmenu-gtk4
             sudo depmod
             sudo modprobe fuse
       - run:
+          name: "Setting up NodeJS and Yarn"
           command: |
             export NVM_DIR="/opt/circleci/.nvm"
             [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
@@ -28,6 +30,7 @@ jobs:
             yarn --version
             echo "Done."
       - run:
+          name: "Preparing AppImage tools and assets"
           command: |
             mkdir bin; cd bin
             curl -L https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage -o appimagetool; chmod +x appimagetool
@@ -36,6 +39,7 @@ jobs:
             curl 'https://about.riot.im/images/riot-nav.svg' -o riot-nav.svg
             git clone https://github.com/vector-im/riot-web.git
       - run:
+          name: "Building Electron image"
           command: |
             export NVM_DIR="/opt/circleci/.nvm"
             [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
@@ -51,6 +55,7 @@ jobs:
             yarn build:electron:appimage
             cd ..
       - run:
+          name: "Building and uploading AppImage"
           command: |
             ./riot-web/electron_app/dist/Riot-*.AppImage --appimage-extract
             mv squashfs-root AppDir
