@@ -7,10 +7,8 @@ jobs:
       - checkout
       - run:
           command: |
-            curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
-            echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
             curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
-            sudo apt-get install yarn nodejs fuse libfuse2 kmod git jq patch appstream-util libindicator7 libdbusmenu-gtk4
+            sudo apt-get install nodejs fuse libfuse2 kmod git jq patch appstream-util libindicator7 libdbusmenu-gtk4
             sudo depmod
             sudo modprobe fuse
       - run:
@@ -34,8 +32,8 @@ jobs:
             nvm use v12.11.1
             echo "npm version"
             npm version
-            echo "npm install -g yarn"
-            npm install -g yarn
+            echo "installing yarn..."
+            curl -o- -L https://yarnpkg.com/install.sh | bash
             yarn --version
             echo "Done."
       - run:
