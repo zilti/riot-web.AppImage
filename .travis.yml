@@ -1,4 +1,4 @@
-language: C
+language: node_js
 sudo: true
 
 script:
