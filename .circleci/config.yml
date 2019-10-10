@@ -22,6 +22,8 @@ jobs:
             source $HOME/.bashrc
             echo "nvm install v12.11.1..."
             nvm install v12.11.1
+      - run:
+          command: |
             echo "nvm use v12.11.1"
             nvm use v12.11.1
             echo "npm version"
