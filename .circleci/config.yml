@@ -7,14 +7,13 @@ jobs:
       - checkout
       - run:
           command: |
-            sudo apt-get remove nodejs
-            curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
-            echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
             curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
             sudo apt-get update
-            sudo apt-get install yarn nodejs fuse libfuse2 kmod git jq patch appstream-util libindicator7 libdbusmenu-gtk4
+            sudo apt-get install nodejs fuse libfuse2 kmod git jq patch appstream-util libindicator7 libdbusmenu-gtk4
             sudo depmod
             sudo modprobe fuse
+            npm version
+            npm install -g yarn
       - run:
           command: |
             mkdir bin; cd bin
