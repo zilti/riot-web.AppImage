@@ -16,11 +16,6 @@ jobs:
             export NVM_DIR="/opt/circleci/.nvm"
             [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
             [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
-      - run:
-          command: |
-            export NVM_DIR="/opt/circleci/.nvm"
-            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-            [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
             echo "nvm install v12.11.1..."
             nvm install v12.11.1
             echo "nvm use v12.11.1"
@@ -70,5 +65,6 @@ jobs:
             export ARCH=x86_64
             export UPDATE_INFORMATION="gh-releases-zsync|zilti|riot-web.AppImage|latest|Riot-*.AppImage.zsync"
             bin/linuxdeploy --appdir=AppDir --desktop-file=AppDir/riot-web.desktop --icon-file=AppDir/usr/share/icons/hicolor/scalable/apps/riot-nav.svg -oappimage
+            export TRAVIS_REPO_SLUG="zilti/riot-web.AppImage"
             wget -c https://github.com/probonopd/uploadtool/raw/master/upload.sh
             bash upload.sh *.AppImage*
