@@ -15,7 +15,8 @@ jobs:
           command: |
             export NVM_DIR="/opt/circleci/.nvm"
             ls $NVM_DIR
-            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+            bash "$NVM_DIR/nvm.sh"
+            echo "Installing NodeJS..."
             nvm install 12.1.1
             nvm use 12.1.1
             npm version
