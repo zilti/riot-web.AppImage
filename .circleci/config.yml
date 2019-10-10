@@ -14,6 +14,7 @@ jobs:
       - run:
           command: |
             export NVM_DIR="/opt/circleci/.nvm"
+            ls $NVM_DIR
             [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
             nvm install 12.1.1
             nvm use 12.1.1
