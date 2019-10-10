@@ -20,6 +20,7 @@ jobs:
             [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
       - run:
           command: |
+            source $HOME/.bashrc
             nvm install 12.1.1
             nvm use 12.1.1
             npm version
