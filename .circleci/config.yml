@@ -25,6 +25,7 @@ jobs:
             git clone https://github.com/vector-im/riot-web.git
       - run:
           command: |
+            echo "NodeJS Version $(nodejs -v) is installed."
             cd riot-web
             patch -i ../package.json.patch
             cp config.sample.json config.json
