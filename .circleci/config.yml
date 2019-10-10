@@ -12,6 +12,8 @@ jobs:
             sudo apt-get install nodejs fuse libfuse2 kmod git jq patch appstream-util libindicator7 libdbusmenu-gtk4
             sudo depmod
             sudo modprobe fuse
+            rm -rf ~/.npmrc
+            npm install nodejs
             npm version
             npm install -g yarn
       - run:
