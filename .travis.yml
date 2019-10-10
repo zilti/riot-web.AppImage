@@ -1,3 +1,4 @@
+language: C
 dist: bionic
 sudo: true
 
@@ -6,6 +7,7 @@ script:
   - mkdir bin; cd bin
   - curl -L https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage -o appimagetool; chmod +x appimagetool
   - curl -L https://github.com/linuxdeploy/linuxdeploy/releases/download/continuous/linuxdeploy-x86_64.AppImage -o linuxdeploy; chmod +x linuxdeploy
+  - curl 'https://about.riot.im/images/riot-nav.svg' -o riot.svg
   - cd ..
   - ## curl -o- -L https://yarnpkg.com/install.sh | bash
   - ## export PATH="$HOME/bin:$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
