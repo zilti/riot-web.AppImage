@@ -15,7 +15,6 @@ jobs:
           command: |
             export NVM_DIR="/opt/circleci/.nvm"
             ls $NVM_DIR
-            /opt/circleci/.nvm/install.sh
             [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
             [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
       - run:
