@@ -14,7 +14,7 @@ jobs:
       - run:
           command: |
             curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | bash
-            export NVM_DIR="$HOME/.nvm"
+            export NVM_DIR="/opt/circleci/.nvm"
             [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
             nvm install 12.1.1
             nvm use 12.1.1
