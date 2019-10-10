@@ -23,17 +23,13 @@ jobs:
             [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
             echo "nvm install v12.11.1..."
             nvm install v12.11.1
-      - run:
-          command: |
-            export NVM_DIR="/opt/circleci/.nvm"
-            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-            [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
             echo "nvm use v12.11.1"
             nvm use v12.11.1
             echo "npm version"
             npm version
             echo "installing yarn..."
             curl -o- -L https://yarnpkg.com/install.sh | bash
+            export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
             yarn --version
             echo "Done."
       - run:
@@ -46,6 +42,7 @@ jobs:
             git clone https://github.com/vector-im/riot-web.git
       - run:
           command: |
+            export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
             echo "NodeJS Version $(nodejs -v) is installed."
             cd riot-web
             patch -i ../package.json.patch
