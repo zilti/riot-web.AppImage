@@ -1,13 +1,13 @@
 version: 2.1 
 jobs:
   build:
-    docker:
-      - image: circleci/node
+    machine:
+      image: circleci/classic:latest
     steps:
       - checkout
       - run:
           command: |
-            sudo apt-get install fuse yarn git jq patch appstream libindicator7 libdbusmenu-gtk4
+            sudo apt-get install fuse nodejs yarn git jq patch appstream libindicator7 libdbusmenu-gtk4
             sudo modprobe fuse
             mkdir bin; cd bin
             curl -L https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage -o appimagetool; chmod +x appimagetool
