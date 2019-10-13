@@ -10,8 +10,8 @@ jobs:
           command: |
             curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
             sudo apt-get install fuse libfuse2 kmod git jq patch appstream-util libindicator7 libdbusmenu-gtk4
-            sudo depmod
-            sudo modprobe fuse
+            #sudo depmod
+            #sudo modprobe fuse
       - run:
           name: "Setting up NodeJS and Yarn"
           command: |
