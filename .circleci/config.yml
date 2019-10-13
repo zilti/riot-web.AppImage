@@ -59,6 +59,7 @@ jobs:
           name: "Building and uploading AppImage"
           command: |
             ./riot-web/electron_app/dist/Riot-*.AppImage --appimage-extract 2>&1
+            echo "Done extracting."
             mv squashfs-root AppDir
             cd AppDir
             mkdir -p usr/share/metainfo
