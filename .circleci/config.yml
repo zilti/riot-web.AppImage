@@ -1,8 +1,8 @@
 version: 2.1 
 jobs:
   build:
-    docker:
-      - image: circleci/node
+    machine:
+      image: ubuntu-1604:201903-01
     steps:
       - checkout
       - run:
@@ -10,13 +10,12 @@ jobs:
           command: |
             curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
             sudo apt-get install fuse libfuse2 kmod git jq patch appstream-util libindicator7 libdbusmenu-gtk4
-            curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.0/install.sh | bash
-            #sudo depmod
-            #sudo modprobe fuse
+            sudo depmod
+            sudo modprobe fuse
       - run:
           name: "Setting up NodeJS and Yarn"
           command: |
-            export NVM_DIR="$HOME/.nvm"
+            export NVM_DIR="/opt/circleci/.nvm"
             [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
             [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
             echo "nvm install v12.11.1..."
@@ -42,7 +41,7 @@ jobs:
       - run:
           name: "Building Electron image"
           command: |
-            export NVM_DIR="$HOME/.nvm"
+            export NVM_DIR="/opt/circleci/.nvm"
             [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
             [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
             export PATH="/opt/circleci/.nvm/versions/node/v12.11.1/bin:$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
@@ -58,8 +57,7 @@ jobs:
       - run:
           name: "Building and uploading AppImage"
           command: |
-            ./riot-web/electron_app/dist/Riot-*.AppImage --appimage-extract 2>&1
-            echo "Done extracting."
+            ./riot-web/electron_app/dist/Riot-*.AppImage --appimage-extract
             mv squashfs-root AppDir
             cd AppDir
             mkdir -p usr/share/metainfo
@@ -71,8 +69,7 @@ jobs:
             cd ..
             export ARCH=x86_64
             export UPDATE_INFORMATION="gh-releases-zsync|zilti|riot-web.AppImage|latest|Riot-*.AppImage.zsync"
-            bin/linuxdeploy --appdir=AppDir --desktop-file=AppDir/riot-web.desktop --icon-file=AppDir/usr/share/icons/hicolor/scalable/apps/riot-nav.svg
-            bin/appimagetool -u "gh-releases-zsync|zilti|riot-web.AppImage|latest|Riot-*.AppImage.zsync" AppDir
+            bin/linuxdeploy --appdir=AppDir --desktop-file=AppDir/riot-web.desktop --icon-file=AppDir/usr/share/icons/hicolor/scalable/apps/riot-nav.svg -oappimage
             export TRAVIS_REPO_SLUG="zilti/riot-web.AppImage"
             wget -c https://github.com/probonopd/uploadtool/raw/master/upload.sh
             bash upload.sh *.AppImage*
