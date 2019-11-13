@@ -7,7 +7,7 @@ steps:
 - name: appimage
   image: opensuse/leap
   commands:
-  - zypper -n install curl
+  - zypper -n install curl tar
   - curl -o- -L https://yarnpkg.com/install.sh | bash
   - export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
   - yarn --version
@@ -26,3 +26,11 @@ steps:
   - yarn add electron-builder --dev
   - yarn build:electron:appimage
   - cd ..
+  - ./riot-web/electron_app/dist/Riot-*.AppImage --appimage-extract
+  - mv squashfs-root AppDir
+  - cd AppDir
+  - mkdir -p usr/share/metainfo
+  - mkdir -p usr/share/icons/hicolor/scalable/apps
+  - mkdir -p usr/share/applications
+  
+  
