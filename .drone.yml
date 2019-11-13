@@ -7,7 +7,7 @@ steps:
 - name: appimage
   image: opensuse/leap
   commands:
-  - zypper -n install curl tar gzip npm
+  - zypper -n install curl tar gzip npm git
   - curl -o- -L https://yarnpkg.com/install.sh | bash
   - export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
   - yarn --version
@@ -36,4 +36,9 @@ steps:
   - cp ../im.vector.riot-web.appdata.xml usr/share/metainfo
   - cp riot-web.desktop usr/share/applications
   - cd ..
-  
+  - export ARCH=x86_64
+  - export UPDATE_INFORMATION="gh-releases-zsync|zilti|riot-web.AppImage|continuous|Riot-*.AppImage.zsync"
+  - bin/linuxdeploy --appdir=AppDir --desktop-file=AppDir/riot-web.desktop --icon-file=AppDir/usr/share/icons/hicolor/scalable/apps/riot-nav.svg -oappimage
+  - export TRAVIS_REPO_SLUG="zilti/riot-web.AppImage"
+  - wget -c https://github.com/probonopd/uploadtool/raw/master/upload.sh
+  - bash upload.sh *.AppImage*
