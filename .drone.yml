@@ -6,6 +6,9 @@ name: default
 steps:
 - name: appimage
   image: opensuse/leap
+  environment:
+    GH_TOKEN:
+      from_secret: GH_TOKEN
   commands:
   - zypper -n install curl tar gzip npm git patch wget
   - curl -o- -L https://yarnpkg.com/install.sh | bash
