@@ -16,7 +16,7 @@ steps:
   - yarn --version
   - MAINLOC=`pwd`
   - cd $HOME/bin
-  - curl -L https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage -o appimagetool; chmod +x appimagetool
+  - #curl -L https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage -o appimagetool; chmod +x appimagetool
   - curl -L https://github.com/linuxdeploy/linuxdeploy/releases/download/continuous/linuxdeploy-x86_64.AppImage -o linuxdeploy; chmod +x linuxdeploy
   - cd $MAINLOC
   - curl https://about.riot.im/images/riot-nav.svg -o riot-nav.svg
@@ -42,7 +42,7 @@ steps:
   - cd ..
   - export ARCH=x86_64
   - export UPDATE_INFORMATION="gh-releases-zsync|zilti|riot-web.AppImage|continuous|Riot-*.AppImage.zsync"
-  - bin/linuxdeploy --appdir=AppDir --desktop-file=AppDir/riot-web.desktop --icon-file=AppDir/usr/share/icons/hicolor/scalable/apps/riot-nav.svg -oappimage
+  - $HOME/bin/linuxdeploy --appdir=AppDir --desktop-file=AppDir/riot-web.desktop --icon-file=AppDir/usr/share/icons/hicolor/scalable/apps/riot-nav.svg -oappimage
   - export TRAVIS_REPO_SLUG="zilti/riot-web.AppImage"
   - wget -c https://github.com/probonopd/uploadtool/raw/master/upload.sh
   - bash upload.sh *.AppImage*
