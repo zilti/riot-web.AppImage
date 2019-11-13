@@ -25,6 +25,9 @@
      <binary>riot-web</binary>
  </provides>
  <releases>
+     <release version="1.5.3" date="2019-11-13">
+       <description>Update</description>
+     </release>
      <release version="1.4.3" date="2019-10-10">
          <description>Initial AppImage release.</description>
      </release>
