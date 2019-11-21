@@ -10,7 +10,6 @@ steps:
     GH_TOKEN:
       from_secret: GH_TOKEN
   commands:
-  - depmod
   - modprobe fuse
   - zypper -n install curl tar gzip npm git patch wget
   - curl -o- -L https://yarnpkg.com/install.sh | bash
