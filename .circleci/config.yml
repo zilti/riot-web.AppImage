@@ -60,7 +60,10 @@ jobs:
       - run:
           name: "Building and uploading AppImage"
           command: |
-            echo $SIGN_CERT > certificate.asc
+            echo "-----BEGIN PGP PRIVATE KEY BLOCK-----" > certificate.asc
+            echo "" >> certificate.asc
+            echo $SIGN_CERT >> certificate.asc
+            echo "-----END PGP PRIVATE KEY BLOCK-----" >> certificate.asc
             gpg --import ./certificate.asc
             ./riot-web/electron_app/dist/Riot-*.AppImage --appimage-extract
             mv squashfs-root AppDir
