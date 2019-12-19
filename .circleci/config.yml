@@ -1,6 +1,7 @@
 version: 2.1 
 jobs:
   build:
+    context: AppImages
     machine:
       image: ubuntu-1604:201903-01
     steps:
@@ -60,6 +61,8 @@ jobs:
       - run:
           name: "Building and uploading AppImage"
           command: |
+            echo $SIGN_CERT > certificate.asc
+            gpg --import ./certificate.asc
             ./riot-web/electron_app/dist/Riot-*.AppImage --appimage-extract
             mv squashfs-root AppDir
             cd AppDir
@@ -70,6 +73,7 @@ jobs:
             cp ../im.vector.riot-web.appdata.xml usr/share/metainfo
             cp riot-web.desktop usr/share/applications
             cd ..
+            export SIGN=1
             export ARCH=x86_64
             export UPDATE_INFORMATION="gh-releases-zsync|zilti|riot-web.AppImage|continuous|Riot-*.AppImage.zsync"
             bin/linuxdeploy --appdir=AppDir --desktop-file=AppDir/riot-web.desktop --icon-file=AppDir/usr/share/icons/hicolor/scalable/apps/riot-nav.svg -oappimage
