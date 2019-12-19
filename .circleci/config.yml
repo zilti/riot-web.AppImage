@@ -1,7 +1,6 @@
 version: 2.1 
 jobs:
   build:
-    context: AppImages
     machine:
       image: ubuntu-1604:201903-01
     steps:
@@ -60,6 +59,7 @@ jobs:
             cd ..
       - run:
           name: "Building and uploading AppImage"
+          context: AppImages
           command: |
             echo $SIGN_CERT > certificate.asc
             gpg --import ./certificate.asc
