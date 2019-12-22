@@ -22,7 +22,7 @@ script:
 - BUILD_HOME="$(pwd)"
 - BUILD_APPDIR="${BUILD_HOME}/AppDir"
 - mkdir -p "${BUILD_HOME}/usr/share"
-- mv riot-web/electron_app/dist/linux-unpacked "${BUILD_HOME}/usr/share/riot-im"
+- mv riot-web/electron_app/dist/linux-unpacked "${BUILD_APPDIR}/usr/share/riot-im"
 - curl 'https://about.riot.im/images/riot-nav.svg' -o riot-nav.svg
 - gpg --import ~/appsign.asc
 - mkdir -p "${BUILD_APPDIR}/usr/share/metainfo"
