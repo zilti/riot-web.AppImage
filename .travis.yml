@@ -32,12 +32,12 @@ script:
 - cp im.vector.riot-web.appdata.xml "${BUILD_APPDIR}/usr/share/metainfo"
 - cp riot-web.desktop "${BUILD_APPDIR}/usr/share/applications"
 - |
-  cat << EOF > "${BUILD_APPDIR}/AppRun"
+  cat << EOF > AppRun
   #!/usr/bin/env bash
   cd "${APPDIR}/usr/share/riot-im"
   env GDK_BACKEND=x11 ./riot-web
   EOF
-- chmod +x "${BUILD_APPDIR}/AppRun"
+- chmod +x AppRun
 - cd ..
 - export SIGN=1
 - export ARCH=x86_64
@@ -49,7 +49,7 @@ script:
   --icon-file=${BUILD_APPDIR}/usr/share/icons/hicolor/scalable/apps/riot-web.svg \
   --executable=${BUILD_APPDIR}/usr/share/riot-im/riot-web \
   --output=appimage \
-  --custom-apprun=${BUILD_APPDIR}/AppRun
+  --custom-apprun=AppRun
   
 after_success:
 - readlink -f .
