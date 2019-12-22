@@ -26,7 +26,7 @@ script:
 -  mkdir -p usr/share/metainfo
 -  mkdir -p usr/share/icons/hicolor/scalable/apps
 -  mkdir -p usr/share/applications
--  cp ../riot-nav.svg usr/share/icons/hicolor/scalable/apps
+-  cp ../riot-nav.svg usr/share/icons/hicolor/scalable/apps/riot-web.svg
 -  cp ../im.vector.riot-web.appdata.xml usr/share/metainfo
 -  cp ../riot-web.desktop usr/share/applications
 -  cd ..
@@ -37,7 +37,7 @@ script:
   bin/linuxdeploy \
   --appdir=AppDir \
   --desktop-file=AppDir/usr/share/applications/riot-web.desktop \
-  --icon-file=AppDir/usr/share/icons/hicolor/scalable/apps/riot-nav.svg \
+  --icon-file=AppDir/usr/share/icons/hicolor/scalable/apps/riot-web.svg \
   --executable=AppDir/usr/share/riot-im/riot-web \
   --output=appimage
   
