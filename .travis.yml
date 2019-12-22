@@ -38,7 +38,6 @@ script:
   env GDK_BACKEND=x11 ./riot-web
   EOF
 - chmod +x AppRun
-- cd ..
 - export SIGN=1
 - export ARCH=x86_64
 - export UPDATE_INFORMATION="gh-releases-zsync|zilti|riot-web.AppImage|continuous|Riot-*.AppImage.zsync"
@@ -50,11 +49,12 @@ script:
   --executable=${BUILD_APPDIR}/usr/share/riot-im/riot-web \
   --output=appimage \
   --custom-apprun=AppRun
+- cp *.AppImage* ~
   
 after_success:
 - readlink -f .
 - wget -c https://github.com/probonopd/uploadtool/raw/master/upload.sh
-- bash upload.sh Riot*.AppImage*
+- bash upload.sh ~/*.AppImage*
 
 before_install:
 - openssl aes-256-cbc -K $encrypted_9cbf37fcefab_key -iv $encrypted_9cbf37fcefab_iv
