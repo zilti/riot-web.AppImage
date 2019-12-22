@@ -1,6 +1,6 @@
 [Desktop Entry]
 Name=Riot
-Exec=sh -c "cd $APPDIR/usr/share/riot-im; env GDK_BACKEND=x11 ./riot-web"
+Exec=AppRun
 Terminal=false
 Type=Application
 Icon=riot-web
