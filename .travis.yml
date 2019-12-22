@@ -44,4 +44,4 @@ after_success:
 
 before_install:
 - openssl aes-256-cbc -K $encrypted_9cbf37fcefab_key -iv $encrypted_9cbf37fcefab_iv
-  -in appsign.asc.enc -out ~\/config/certs/appsign.asc -d
+  -in appsign.asc.enc -out appsign.asc -d
