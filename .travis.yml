@@ -22,7 +22,7 @@ script:
 - BUILD_HOME="$(pwd)"
 - BUILD_APPDIR="${BUILD_HOME}/AppDir"
 - mkdir -p "${BUILD_HOME}/usr/share"
-- cp -r riot-web/electron_app/dist/linux-unpacked "${BUILD_HOME}/usr/share/riot-im"
+- mv riot-web/electron_app/dist/linux-unpacked "${BUILD_HOME}/usr/share/riot-im"
 - curl 'https://about.riot.im/images/riot-nav.svg' -o riot-nav.svg
 - gpg --import ~/appsign.asc
 - mkdir -p "${BUILD_APPDIR}/usr/share/metainfo"
@@ -31,12 +31,6 @@ script:
 - cp riot-nav.svg "${BUILD_APPDIR}/usr/share/icons/hicolor/scalable/apps/riot-web.svg"
 - cp im.vector.riot-web.appdata.xml "${BUILD_APPDIR}/usr/share/metainfo"
 - cp riot-web.desktop "${BUILD_APPDIR}/usr/share/applications"
-- |
-  cat << EOF > AppRun
-  #!/usr/bin/env bash
-  cd "${APPDIR}/usr/share/riot-im"
-  env GDK_BACKEND=x11 ./riot-web
-  EOF
 - chmod +x AppRun
 - export SIGN=1
 - export ARCH=x86_64
