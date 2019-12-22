@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Riot
+Exec=sh -c "cd $APPDIR/usr/share/riot-im; ./riot-web"
+Terminal=false
+Type=Application
+Icon=riot-web
+StartupWMClass=riot
+X-AppImage-Version=1.5.6
+Comment=A feature-rich client for Matrix.org
+Categories=Network;InstantMessaging;Chat;
