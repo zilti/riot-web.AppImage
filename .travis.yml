@@ -3,18 +3,13 @@ sudo: true
 
 script:
 - sudo apt-get install git nodejs binutils fuse appstream-util
-- curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.2/install.sh | bash
-- export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
-- [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 - nvm install v12.14.0
 - nvm use v12.14.0
 - curl -o- -L https://yarnpkg.com/install.sh | bash
 - export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
-- cd bin
-- curl -L https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage
-  -o appimagetool; chmod +x appimagetool
-- curl -L https://github.com/linuxdeploy/linuxdeploy/releases/download/continuous/linuxdeploy-x86_64.AppImage
-  -o linuxdeploy; chmod +x linuxdeploy
+- mkdir bin; cd bin
+- curl -L https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage -o appimagetool; chmod +x appimagetool
+- curl -L https://github.com/linuxdeploy/linuxdeploy/releases/download/continuous/linuxdeploy-x86_64.AppImage -o linuxdeploy; chmod +x linuxdeploy
 - cd ..
 - git clone https://github.com/vector-im/riot-web.git
 - cd riot-web
@@ -33,13 +28,16 @@ script:
 - mkdir -p usr/share/applications
 - cp ../riot-nav.svg usr/share/icons/hicolor/scalable/apps
 - cp ../im.vector.riot-web.appdata.xml usr/share/metainfo
-- cp ../riot-web.deskotp usr/share/applications
+- cp ../riot-web.desktop usr/share/applications
 - cd ..
 - export SIGN=1
 - export ARCH=x86_64
 - export UPDATE_INFORMATION="gh-releases-zsync|zilti|riot-web.AppImage|continuous|Riot-*.AppImage.zsync"
-- bin/linuxdeploy \ --appdir=AppDir \ --desktop-file=AppDir/usr/share/applications/riot-web.desktop
-  \ --icon-file=AppDir/usr/share/icons/hicolor/scalable/apps/riot-nav.svg \ --executable=AppDir/usr/share/riot-im/riot-web
+- bin/linuxdeploy
+  \ --appdir=AppDir
+  \ --desktop-file=AppDir/usr/share/applications/riot-web.desktop
+  \ --icon-file=AppDir/usr/share/icons/hicolor/scalable/apps/riot-nav.svg
+  \ --executable=AppDir/usr/share/riot-im/riot-web
   \ --output=appimage
   
 after_success:
