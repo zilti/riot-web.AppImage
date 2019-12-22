@@ -2,47 +2,46 @@ language: node_js
 sudo: true
 
 script:
-  - sudo apt-get install git nodejs binutils fuse appstream-util
-  - curl -o- -L https://yarnpkg.com/install.sh | bash
-  - export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
-  - cd bin
-  - curl -L https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage -o appimagetool; chmod +x appimagetool
-  - curl -L https://github.com/linuxdeploy/linuxdeploy/releases/download/continuous/linuxdeploy-x86_64.AppImage -o linuxdeploy; chmod +x linuxdeploy
-  - cd ..
-  - git clone https://github.com/vector-im/riot-web.git
-  - cd riot-web
-  - git checkout v.1.5.6
-  - cp config.sample.json config.json
-  - yarn install
-  - yarn build:electron:linux
-  - cd ..
-  - mkdir -p AppDir/usr/share
-  - cp -r riot-web/electron_app/dist/linux-unpacked AppDir/usr/share/riot-im
-  - curl 'https://about.riot.im/images/riot-nav.svg' -o riot-nav.svg
-  - echo "-----BEGIN PGP PRIVATE KEY BLOCK-----" > certificate.asc
-  - echo "" >> certificate.asc
-  - echo $SIGN_CERT | sed 's/\s/\n/g' >> certificate.asc
-  - echo "-----END PGP PRIVATE KEY BLOCK-----" >> certificate.asc
-  - gpg --import ./certificate.asc
-  - cd AppDir
-  - mkdir -p usr/share/metainfo
-  - mkdir -p usr/share/icons/hicolor/scalable/apps
-  - mkdir -p usr/share/applications
-  - cp ../riot-nav.svg usr/share/icons/hicolor/scalable/apps
-  - cp ../im.vector.riot-web.appdata.xml usr/share/metainfo
-  - cp ../riot-web.deskotp usr/share/applications
-  - cd ..
-  - export SIGN=1
-  - export ARCH=x86_64
-  - export UPDATE_INFORMATION="gh-releases-zsync|zilti|riot-web.AppImage|continuous|Riot-*.AppImage.zsync"
-  - bin/linuxdeploy \
-    --appdir=AppDir \
-    --desktop-file=AppDir/usr/share/applications/riot-web.desktop \
-    --icon-file=AppDir/usr/share/icons/hicolor/scalable/apps/riot-nav.svg \
-    --executable=AppDir/usr/share/riot-im/riot-web \
-    --output=appimage
-
+- sudo apt-get install git nodejs binutils fuse appstream-util
+- curl -o- -L https://yarnpkg.com/install.sh | bash
+- export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+- cd bin
+- curl -L https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage
+  -o appimagetool; chmod +x appimagetool
+- curl -L https://github.com/linuxdeploy/linuxdeploy/releases/download/continuous/linuxdeploy-x86_64.AppImage
+  -o linuxdeploy; chmod +x linuxdeploy
+- cd ..
+- git clone https://github.com/vector-im/riot-web.git
+- cd riot-web
+- git checkout v1.5.6
+- cp config.sample.json config.json
+- yarn install
+- yarn build:electron:linux
+- cd ..
+- mkdir -p AppDir/usr/share
+- cp -r riot-web/electron_app/dist/linux-unpacked AppDir/usr/share/riot-im
+- curl 'https://about.riot.im/images/riot-nav.svg' -o riot-nav.svg
+- gpg --import ./appsign.asc
+- cd AppDir
+- mkdir -p usr/share/metainfo
+- mkdir -p usr/share/icons/hicolor/scalable/apps
+- mkdir -p usr/share/applications
+- cp ../riot-nav.svg usr/share/icons/hicolor/scalable/apps
+- cp ../im.vector.riot-web.appdata.xml usr/share/metainfo
+- cp ../riot-web.deskotp usr/share/applications
+- cd ..
+- export SIGN=1
+- export ARCH=x86_64
+- export UPDATE_INFORMATION="gh-releases-zsync|zilti|riot-web.AppImage|continuous|Riot-*.AppImage.zsync"
+- bin/linuxdeploy \ --appdir=AppDir \ --desktop-file=AppDir/usr/share/applications/riot-web.desktop
+  \ --icon-file=AppDir/usr/share/icons/hicolor/scalable/apps/riot-nav.svg \ --executable=AppDir/usr/share/riot-im/riot-web
+  \ --output=appimage
+  
 after_success:
-  - readlink -f .
-  - wget -c https://github.com/probonopd/uploadtool/raw/master/upload.sh
-  - bash upload.sh Riot*.AppImage*
+- readlink -f .
+- wget -c https://github.com/probonopd/uploadtool/raw/master/upload.sh
+- bash upload.sh Riot*.AppImage*
+
+before_install:
+- openssl aes-256-cbc -K $encrypted_9cbf37fcefab_key -iv $encrypted_9cbf37fcefab_iv
+  -in appsign.asc.enc -out ~\/config/certs/appsign.asc -d
