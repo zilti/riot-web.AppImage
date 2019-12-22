@@ -24,7 +24,7 @@ script:
 - mkdir -p "${BUILD_HOME}/usr/share"
 - cp -r riot-web/electron_app/dist/linux-unpacked "${BUILD_HOME}/usr/share/riot-im"
 - curl 'https://about.riot.im/images/riot-nav.svg' -o riot-nav.svg
-- gpg --import ./appsign.asc
+- gpg --import ~/appsign.asc
 - mkdir -p "${BUILD_APPDIR}/usr/share/metainfo"
 - mkdir -p "${BUILD_APPDIR}/usr/share/icons/hicolor/scalable/apps"
 - mkdir -p "${BUILD_APPDIR}/usr/share/applications"
@@ -58,4 +58,4 @@ after_success:
 
 before_install:
 - openssl aes-256-cbc -K $encrypted_9cbf37fcefab_key -iv $encrypted_9cbf37fcefab_iv
-  -in appsign.asc.enc -out appsign.asc -d
+  -in appsign.asc.enc -out ~/appsign.asc -d
