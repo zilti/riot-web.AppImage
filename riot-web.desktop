@@ -5,6 +5,6 @@ Terminal=false
 Type=Application
 Icon=riot-web
 StartupWMClass=riot
-X-AppImage-Version=1.5.9
+X-AppImage-Version=1.5.12
 Comment=A feature-rich client for Matrix.org
 Categories=Network;InstantMessaging;Chat;
