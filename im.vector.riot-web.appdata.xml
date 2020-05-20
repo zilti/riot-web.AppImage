@@ -25,6 +25,9 @@
      <binary>riot-web</binary>
  </provides>
  <releases>
+   <release version="1.6.1" date="2020-05-20">
+     <description>Update to current release version</description>
+   </release>
    <release version="1.6.0-rc.6" date="2020-05-05">
      <description>Update to current release version</description>
    </release>

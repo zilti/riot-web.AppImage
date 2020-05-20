@@ -13,7 +13,7 @@ script:
 - cd ..
 - git clone https://github.com/vector-im/riot-web.git
 - cd riot-web
-- git checkout v1.6.0-rc.6
+- git checkout v1.6.1
 - cp config.sample.json config.json
 - yarn install
 - yarn build:electron:linux
